@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Contact</title>
+</head>
+<body>
+    <nav id="ham-menu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="./aboutme.html">About me</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul> 
+    </nav>
+    <header>
+        <img src="./img/mvdesigns-logo.svg" alt="logo">
+        <a href="javascript:void(0)" onclick="openNav()" class="hamburger" href=""><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1368"><defs><style>.cls-1{fill: white;} @media only screen and (max-width: 800px) {.cls-1{fill: black;}}</style></defs><rect class="cls-1" width="2000" height="216"/><rect class="cls-1" x="288" y="576" width="1712" height="216"/><rect class="cls-1" x="576" y="1152" width="1424" height="216"/></svg> </a>
+    </header>
+    <section class="contact">
+        <div class="contacttext">
+            <p>Contact</p>
+            <h1>Get in touch.</h1>
+            <div>
+                <h2>Contactdetails</h2>
+                <p>Martijn.vandriest@gmail.com</p>
+                <p>0645506565</p>
+            </div>
+        </div>
+    </section>
+    <section class="hi">
+        <div class="hitext">
+            <img class="cat" src="./img/cat.gif" alt="cat">
+            <h1>Say hi.</h1>
+            <div>
+                <a href="mailto:martijn.vandriest@gmail.com">martijn.vandriest@gmail.com <img src="./img/arrow.svg" alt=""></a>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        /* Open */
+        function openNav() {
+            console.log('Open menu')
+        document.getElementById("ham-menu").style.height = "100%";
+        }
+
+        /* Close */
+        function closeNav() {
+        document.getElementById("ham-menu").style.height = "0%";
+        }
+    </script>
+</body>
+</html>

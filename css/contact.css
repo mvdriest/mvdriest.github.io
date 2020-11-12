@@ -1,0 +1,223 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2em 4em;
+}
+header img{
+    height: 53px;
+}
+.hamburger{
+    width: 33px;
+}
+nav{
+    height: 0%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    overflow: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */  
+}
+.menu{
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+nav a{
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */ 
+}
+nav a:hover, nav a:focus{
+    color: #1b00b4;
+}
+nav .closebtn{
+    position: absolute;
+    top: 10px;
+    right: 85px;
+    font-size: 60px;
+}
+li a{
+    font-family: bebas neue;
+    font-weight: lighter;
+    color: white;
+    font-size: 5.5em; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 100px;
+}
+.hi{
+    background-color: #2D2626;
+    width: 50%;
+    float: right;
+    height: 109.6vh;
+    position: relative;
+    margin-top: -200px;
+    z-index: -1000;
+}
+.hitext{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%; 
+}
+.hitext h1{
+    padding: 40px 0px;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+}
+.hitext a{
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    padding: 20px 55px 20px 40px;
+    border: 2px solid white;
+    border-radius: 40px;
+    position: relative;
+    line-height: 0px;
+    text-align: center;
+    display: inline-block;
+}
+.hitext a img{
+    width: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: inline-block;
+    margin-left: 10px;
+    opacity: .5;
+}
+.hitext div{
+    margin-top: 20px;
+    text-align: center;
+}
+.contact{
+    width: 50%;
+    float: left;
+    height: 89vh;
+    position: relative;
+}
+.contacttext{
+    position: absolute;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+.contacttext h1{
+    font-size: 3rem;
+}
+.contacttext div h2{
+    font-size: 1rem;
+    color: #A58861;
+}
+.contacttext div{
+    margin-top: 30px;
+}
+body{
+    font-family: roboto;
+}
+.hitext div:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+@media only screen and (max-width: 1300px){
+    .textinstagram{
+        padding: 120px;
+    }
+    .cat{
+        width: 100%;
+        text-align: center;
+    }
+    .hitext a{
+        display: inline-block;
+        margin: 0px;
+    }
+}
+@media only screen and (max-width: 1126px){
+    .textinstagram{
+        padding: 90px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .cls-1{
+        fill:black;
+    }
+    .contacttext{
+        position: absolute;
+        top: 30%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+    .cat{
+        width: 100%;
+        text-align: center;
+    }
+    .hi{
+        background-color: #2D2626;
+        width: 100%;
+        float: right;
+        height: 90vh;
+        position: relative;
+        z-index: -1000;
+    }
+    .contact{
+        width: 100%;
+        height: 105vh;
+        position: relative;
+    }
+    footer{
+        flex-direction: column;
+        height: 35vh;
+        justify-content: center;
+    }
+    .logofooter{
+        width: 34px;
+        margin-bottom:40px;
+    }
+    .web-img{
+        flex-direction: column;
+    }
+    .web-img img{
+        width: 100%;
+    }
+    footer a{
+        margin-top: 40px;
+        width: 30px;
+    }
+    .collab{
+        font-size: 1.2em; 
+    }
+    nav .closebtn{
+        top: 10px;
+        right: 20px;
+    }
+    header img{
+        height: 43px;
+    }
+    .hamburger{
+        width: 33px;
+    }
+    .menu li a{
+        text-align: center;
+    }
+    .menu{
+        font-size: 0.5em;
+        text-align: center;
+    }
+}

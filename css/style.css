@@ -1,0 +1,217 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main h1,h2{
+    color: white;
+    font-family: Bebas Neue;
+    font-weight: lighter;
+}
+main h1{
+    font-size: 7em;
+}
+main section{
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+main svg img{
+    fill: white;
+    width: 20px;
+}
+.instagram{
+    width: 35px;
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+    display: inline-block;
+    fill: white;
+}
+.instagram:hover{
+    transform: scale(1.3);
+    transition: 0.5s;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    padding: 2em 4em;
+    margin: auto;
+    padding-top: 2%;
+    background-image: url(../img/achtergrond.jpg);
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+header img{
+    height: 30px;
+}
+.hamburger{
+    width: 33px;
+}
+.projects{
+    background-color: black;
+    position: relative;
+    height: 700px;
+}
+.projectsbox {
+    position: relative;
+    width: 160px;
+    display: flex;
+    align-items: center;
+    height: 700px;
+}
+
+.projectsbox img{
+    width: 100%;
+    filter: brightness(40%);
+}
+
+.projectsbox p {
+    position: absolute;
+    color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size:  1.6rem;
+    opacity: 100%;
+    z-index: 1;
+    font-family: bebas neue;
+    font-weight: lighter;
+}
+.projectboxes{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.projects h1{
+    position: absolute;
+    color: white;
+    font-family: bebas neue;
+    font-weight: lighter;
+    font-size: 4em;
+    top: 10%;
+    left: 20%;
+}
+.projectsbox img{
+    position: relative;
+}
+.projectsbox{
+    width: 250px;
+}
+.projectsbox:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+nav{
+    height: 0%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    overflow-x: hidden;
+    overflow: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */  
+}
+.menu{
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+nav a{
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */ 
+}
+nav a:hover, nav a:focus{
+    color: #1b00b4;
+}
+nav .closebtn{
+    position: absolute;
+    top: 10px;
+    right: 85px;
+    font-size: 60px;
+}
+li a{
+    font-family: bebas neue;
+    font-weight: lighter;
+    color: white;
+    font-size: 5.5em; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 100px;
+}
+@media only screen and (max-width: 1300px){
+    .projectsbox{
+        width: 180px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .projects h1{
+        position: relative;
+        color: white;
+        font-family: bebas neue;
+        font-weight: lighter;
+        font-size: 4em;
+        text-align: center;
+        top: 0%;
+        left: 0%;
+        padding: 60px;
+    }
+    header{
+        width: 100%;
+        padding: 1.5em 2em;
+    }
+    .hamburger{
+        width: 33px;
+    }
+    .projects{
+        height: 2300px;
+    }
+    .projectsbox{
+        width: 70%;
+        height: 500px;
+    }
+    .projectboxes{
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .instagram{
+        width: 35px;
+        position: absolute;
+        bottom: 22px;
+        right: 3%;
+        display: inline-block;
+        fill: white;
+    }
+    main h1{
+        font-size: 5em;
+    }
+    nav .closebtn{
+        top: 10px;
+        right: 20px;
+    }
+    header img{
+        height: 30px;
+    }
+    .hamburger{
+        width: 33px;
+    }
+    .menu li a{
+        text-align: center;
+    }
+    .menu{
+        font-size: 0.5em;
+        text-align: center;
+    }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/instagram.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <title>Instagram</title>
+</head>
+<body>
+    <nav id="ham-menu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+       <ul class="menu">
+           <li><a href="index.html">Home</a></li>
+           <li><a href="./index.html">Projects</a></li>
+           <li><a href="./aboutme.html">About me</a></li>
+           <li><a href="./contact.html">Contact</a></li>
+       </ul> 
+    </nav>
+    <header>
+        <h1 class="headtext">Instagram</h1>
+        <a href="./index.html"><img src="./img/logo.png" alt="logo"></a>
+        <a href="javascript:void(0)" onclick="openNav()" class="hamburger" href=""><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1368"><defs><style>.cls-white{fill:white;}</style></defs><rect class="cls-white" width="2000" height="216"/><rect class="cls-white" x="288" y="576" width="1712" height="216"/><rect class="cls-white" x="576" y="1152" width="1424" height="216"/></svg> </a>
+    </header>
+    <main>
+        <section class="textinstagram">
+            <section class="instagramstory">
+                <h2>Instagram</h2>
+                <p>I have made a lot for Instagram accounts. My main design account is mvdesigns__. <br>
+                    On that account I show a couple of designs that I made for different accounts and for example <br>
+                    a redesign that I made. </p>
+            </section>
+            <section class="Instagramlink">
+                <p>Instagram</p>
+                <a href="https://www.instagram.com/mvdesigns__/"><p>instagram.com/mvdesigns__</p></a>
+            </section>
+        </section>
+        <img src="./img/instagram-image.png" alt="instagram-image">
+        <section class="collab">
+            <h1>I have a collaboration with <span>FCUHEADLINES.</span></h1>
+        </section>
+        <img src="./img/fcuheadlines-collab.png" alt="">
+    </main>
+    <footer>
+        <img class="logofooter" src="./img/mvdesigns-logo.svg" alt="logo">
+        <section>
+            <p>+31 6 45506565</p>
+            <p>Martijn.vandriest@gmail.com</p>
+        </section>
+        <a href="https://www.instagram.com/mvdesigns__/">
+            <svg class="instagram" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000.89 2000.64"><defs><style>.cls-1{fill:black;}</style></defs><path class="cls-1" d="M1000,1477.09c-263.32,0-477.55-214.21-477.55-477.53S736.64,522,1000,522,1477.5,736.24,1477.5,999.56,1263.28,1477.09,1000,1477.09Zm0-775c-164,0-297.49,133.45-297.49,297.48S835.92,1297,1000,1297s297.48-133.45,297.48-297.47S1164,702.08,1000,702.08Z" transform="translate(0.49 0.64)"/><circle class="cls-1" cx="1647.85" cy="352.79" r="87"/><path class="cls-1" d="M2000.15-.64H-.49V2000H2000.4V-.64ZM179.57,1819.94V179.42H1820.34V1819.94Z" transform="translate(0.49 0.64)"/></svg>
+        </a>
+    </footer>
+    <script>
+        /* Open */
+        function openNav() {
+            console.log('Open menu')
+        document.getElementById("ham-menu").style.height = "100%";
+        }
+
+        /* Close */
+        function closeNav() {
+        document.getElementById("ham-menu").style.height = "0%";
+        }
+    </script>
+</body>
+</html>
