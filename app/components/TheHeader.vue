@@ -17,6 +17,8 @@ let heroMediaMatchMedia
 const animate = async () => {
   await nextTick()
 
+  if (!title.value) return
+
   if (hasAnimated) return
   hasAnimated = true
 
@@ -105,6 +107,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  split?.revert?.()
   heroMediaMatchMedia?.revert?.()
 })
 
@@ -112,7 +115,7 @@ watch(loaderFinished, (finished) => {
   if (finished) {
     animate()
   }
-})
+}, { immediate: true })
 </script>
 
 <template>

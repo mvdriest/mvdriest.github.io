@@ -7,6 +7,7 @@ const route = useRoute()
 
 const navStatus = ref<NavStatus>('not-active')
 const isActive = computed(() => navStatus.value === 'active')
+const viewportOffsetTop = ref(0)
 
 const setNavStatus = (status: NavStatus) => {
   navStatus.value = status
@@ -34,12 +35,29 @@ const onKeyDown = (e: KeyboardEvent) => {
   if (e.key === 'Escape' && isActive.value) closeNav()
 }
 
+const updateViewportOffsetTop = () => {
+  if (!process.client) {
+    viewportOffsetTop.value = 0
+    return
+  }
+
+  viewportOffsetTop.value = Math.max(window.visualViewport?.offsetTop ?? 0, 0)
+}
+
 onMounted(() => {
+  updateViewportOffsetTop()
+
   document.addEventListener('keydown', onKeyDown)
+  window.addEventListener('resize', updateViewportOffsetTop)
+  window.visualViewport?.addEventListener('resize', updateViewportOffsetTop)
+  window.visualViewport?.addEventListener('scroll', updateViewportOffsetTop)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', onKeyDown)
+  window.removeEventListener('resize', updateViewportOffsetTop)
+  window.visualViewport?.removeEventListener('resize', updateViewportOffsetTop)
+  window.visualViewport?.removeEventListener('scroll', updateViewportOffsetTop)
 })
 
 watch(
@@ -54,8 +72,9 @@ watch(
 <template>
   <nav
     data-twostep-nav
-    class="fixed inset-0 z-100 pointer-events-none"
+    class="fixed inset-x-0 bottom-0 z-100 pointer-events-none"
     :data-nav-status="navStatus"
+    :style="{ top: `max(env(safe-area-inset-top), ${viewportOffsetTop}px)` }"
     aria-label="Mobile"
   >
     <div
@@ -80,7 +99,7 @@ watch(
             />
           </div>
 
-          <div class="relative z-1 flex h-16 w-full items-center justify-between px-5 py-5">
+          <div data-mobile-header-bar class="relative z-1 flex h-16 w-full items-center justify-between px-5 py-5">
             <NuxtLink
               to="/"
               class="flex h-full w-24 items-center justify-start"

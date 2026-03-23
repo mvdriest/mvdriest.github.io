@@ -1,9 +1,18 @@
+<script setup lang="ts">
+const route = useRoute()
+
+const isContactPage = computed(() => route.path === '/contact')
+</script>
+
 <template>
   <footer
-    class="border-solid border-dark-500 bg-dark-600 pb-24 text-white"
+    :class="[
+      'border-solid border-dark-500 pb-24 text-white',
+      isContactPage ? 'bg-gray-200' : 'bg-dark-600',
+    ]"
   >
     <LayoutTheContainer>
-      <div class="bg-[#2E2E2E] rounded-[24px] p-12">
+      <div :class="['rounded-3xl p-12', isContactPage ? 'bg-dark-600' : 'bg-[#2E2E2E]']">
 
         <nuxt-img
               src="/images/other/mvdriest.svg"
@@ -16,10 +25,6 @@
               <h1 class="max-w-sm text-3xl leading-8 font-semibold mb-8 uppercase">
                 Ik ben jouw allround creative.
               </h1>
-              <a
-                href="tel:0645506565"
-                class="hover:text-primary-600 pointer no-underline"
-              >+31 6 45506565</a>
               <a
                 href="mail:Martijn.vandriest@gmail.com"
                 class="mt-3 hover:text-primary-600 pointer no-underline"

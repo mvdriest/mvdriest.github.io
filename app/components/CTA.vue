@@ -493,19 +493,46 @@ function initMarqueeScrollSpeed(
 ): CleanupFn | null {
   if (!marquee) return null
 
-  // Drive marquee speed via tween timeScale, rather than fighting over `startOffset`.
-  const clampBoost = gsap.utils.clamp(0.6, 4)
+  // Give the marquee a small temporary boost while scrolling,
+  // then always ease back to its normal speed.
+  const clampBoost = gsap.utils.clamp(1, 1.8)
+  const boostState = { value: 1 }
+  const applyBoost = () => radial.setScrollBoost(boostState.value)
+
   const trigger = ScrollTrigger.create({
     trigger: marquee,
     start: 'top bottom',
     end: 'bottom top',
     onUpdate: (self: any) => {
-      const boost = clampBoost(1 + self.getVelocity() / 900)
-      radial.setScrollBoost(boost)
+      const velocity = Math.abs(self.getVelocity?.() || 0)
+      const boost = clampBoost(1 + velocity / 3200)
+
+      gsap.killTweensOf(boostState)
+      boostState.value = boost
+      applyBoost()
+
+      gsap.to(boostState, {
+        value: 1,
+        duration: 0.9,
+        ease: 'power2.out',
+        overwrite: true,
+        onUpdate: applyBoost
+      })
+    },
+    onLeave: () => {
+      gsap.killTweensOf(boostState)
+      boostState.value = 1
+      applyBoost()
+    },
+    onLeaveBack: () => {
+      gsap.killTweensOf(boostState)
+      boostState.value = 1
+      applyBoost()
     }
   })
 
   return () => {
+    gsap.killTweensOf(boostState)
     trigger.kill()
     radial.setScrollBoost(1)
   }
@@ -522,7 +549,7 @@ function initMarqueeScrollSpeed(
   text-transform: uppercase;
   font-weight: 600;
   /* set a reasonable height for the marquee */
-  min-height: clamp(8rem, 50vh, 25rem);
+  min-height: clamp(8rem, 35vh, 25rem);
   height: auto;
   /* allow the generated SVG to be centered */
   display: block;

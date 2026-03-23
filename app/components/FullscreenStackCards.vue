@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -94,11 +94,11 @@ const cards: StackCard[] = [
     ]
   },
   {
-    title: 'WEBDESIGN & DEVELOPMENT',
+    title: 'WEB',
     description: 'Snelle, sterke websites die goed voelen en gericht zijn op resultaat.',
     alt: 'Webdesign en development',
     backgroundColor: '#f5ff00',
-    chips: ['UX/UI design', 'Nuxt', 'CMS integratie', 'Performance'],
+    chips: ['Custom design', 'Development', 'CMS integratie', 'Performance'],
     kind: 'images',
     images: [
       '/images/other/aamockup.jpg',
@@ -111,8 +111,57 @@ const cards: StackCard[] = [
 
 const sectionRef = ref<HTMLElement | null>(null)
 const cardsRef = ref<HTMLElement | null>(null)
+const mobileHeaderOffset = ref(0)
+const viewportHeight = ref(0)
+const isMobile = ref(false)
 
 let gsapContext: gsap.Context | null = null
+
+const isMobileViewport = () => window.innerWidth < 768
+
+const getMobileHeaderOffset = () => {
+  if (!isMobileViewport()) return 0
+
+  const mobileHeaderBar = document.querySelector<HTMLElement>('[data-mobile-header-bar]')
+  if (!(mobileHeaderBar instanceof HTMLElement)) {
+    return 84
+  }
+
+  return Math.max(Math.ceil(mobileHeaderBar.getBoundingClientRect().bottom), 84)
+}
+
+const updateMobileLayoutMetrics = () => {
+  viewportHeight.value = window.innerHeight
+  isMobile.value = isMobileViewport()
+  mobileHeaderOffset.value = getMobileHeaderOffset()
+}
+
+const sectionStyle = computed(() => {
+  if (mobileHeaderOffset.value <= 0) return undefined
+
+  return {
+    scrollMarginTop: `${mobileHeaderOffset.value + 16}px`
+  }
+})
+
+const viewportFrameStyle = computed(() => {
+  const styles: Record<string, string> = {}
+
+  if (viewportHeight.value > 0) {
+    styles.height = `${viewportHeight.value}px`
+  }
+
+  if (!isMobile.value || mobileHeaderOffset.value <= 0) {
+    return Object.keys(styles).length ? styles : undefined
+  }
+
+  styles.paddingTop = `${mobileHeaderOffset.value + 20}px`
+  styles.paddingRight = '20px'
+  styles.paddingBottom = '20px'
+  styles.paddingLeft = '20px'
+
+  return styles
+})
 
 const initStackCards = () => {
   const section = sectionRef.value
@@ -138,7 +187,13 @@ const initStackCards = () => {
     scrollTrigger: {
       trigger: section,
       start: 'top top',
-      end: () => `+=${window.innerHeight * (cardEls.length - 1) * 1.35}`,
+      end: () => {
+        const effectiveViewportHeight = isMobileViewport()
+          ? Math.max(window.innerHeight - mobileHeaderOffset.value - 20, 320)
+          : window.innerHeight
+
+        return `+=${effectiveViewportHeight * (cardEls.length - 1) * 1.35}`
+      },
       scrub: 0.45,
       snap: {
         snapTo: 1 / (cardEls.length - 1),
@@ -174,15 +229,19 @@ const initStackCards = () => {
 
 onMounted(async () => {
   await nextTick()
+  updateMobileLayoutMetrics()
 
   gsapContext = gsap.context(() => {
     initStackCards()
   }, sectionRef)
 
+  window.addEventListener('resize', updateMobileLayoutMetrics)
   ScrollTrigger.refresh()
 })
 
 onUnmounted(() => {
+  window.removeEventListener('resize', updateMobileLayoutMetrics)
+
   if (gsapContext) {
     gsapContext.revert()
     gsapContext = null
@@ -191,8 +250,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="min-h-screen w-full bg-gray-200" data-progress-nav-anchor>
-    <div class="relative h-screen w-full p-12.5 max-[991px]:p-8.75 max-[640px]:p-5">
+  <section ref="sectionRef" class="min-h-screen w-full bg-gray-200" :style="sectionStyle" data-progress-nav-anchor>
+    <div class="relative box-border h-svh w-full p-12.5 max-[991px]:p-8.75 max-[640px]:p-5" :style="viewportFrameStyle">
       <div ref="cardsRef" class="relative h-full w-full">
         <article
           v-for="(card, index) in cards"
@@ -201,20 +260,20 @@ onUnmounted(() => {
           class="absolute inset-0 overflow-hidden rounded-[1.75rem] origin-center will-change-[transform,opacity] backface-hidden max-[640px]:rounded-2xl"
           :style="{ backgroundColor: card.backgroundColor }"
         >
-          <LayoutTheContainer class="h-full px-0 py-10 md:py-24">
+          <LayoutTheContainer class="h-full px-0 !py-6 sm:!py-8 md:!py-24">
 
-            <div class="flex flex-col md:flex-row gap-4 md:gap-8 justify-start md:justify-between z-2 h-full" :style="{ color: getReadableTextColor(card.backgroundColor) }">
-              <div class="order-2 md:order-1 flex flex-col items-stretch flex-1 min-h-0 w-full md:w-auto max-w-full md:max-w-lg lg:max-w-xl h-full">
-                <h2 class="z-50 text-4xl md:text-7xl uppercase font-bold max-w-200 leading-tight md:leading-18 text-left">{{ card.title }}</h2>
+            <div class="flex h-full min-h-0 flex-col gap-3 md:flex-row md:gap-8 md:justify-between z-2" :style="{ color: getReadableTextColor(card.backgroundColor) }">
+              <div class="order-2 md:order-1 flex flex-1 min-h-0 w-full max-w-full flex-col items-stretch md:h-full md:w-auto md:max-w-lg lg:max-w-xl">
+                <h2 class="z-50 max-w-200 text-[clamp(2rem,8.5vw,2.7rem)] leading-[0.94] text-left font-bold uppercase md:text-7xl md:leading-18">{{ card.title }}</h2>
 
                 <!-- Mobile: description under H2, then chips -->
-                <div class="mt-4 md:hidden">
-                  <p class="z-50 text-base font-semibold text-left max-w-88 font-family-helvetica -tracking-[1px]" :style="{ color: getDescriptionColor(card.backgroundColor) }">{{ card.description }}</p>
-                  <ul class="mt-4 flex flex-wrap gap-2.5 max-w-96">
+                <div class="mt-3 md:hidden">
+                  <p class="z-50 max-w-88 text-sm font-semibold text-left font-family-helvetica -tracking-[0.8px]" :style="{ color: getDescriptionColor(card.backgroundColor) }">{{ card.description }}</p>
+                  <ul class="mt-3 flex max-w-88 flex-wrap gap-2">
                     <li
                       v-for="chip in card.chips"
                       :key="`${card.title}-${chip}`"
-                      class="rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide"
+                      class="rounded-md border px-2.5 py-1 text-sm font-semibold font-family-helvetica -tracking-[0.8px] uppercase"
                       :style="getChipStyle(card.backgroundColor)"
                     >
                       {{ chip }}
@@ -228,7 +287,7 @@ onUnmounted(() => {
                     <li
                       v-for="chip in card.chips"
                       :key="`${card.title}-${chip}`"
-                      class="rounded-full border px-3 py-1 text-xs md:text-sm font-semibold uppercase tracking-wide"
+                      class="rounded-md border px-3 py-2 text-base font-semibold font-family-helvetica -tracking-[1px] uppercase"
                       :style="getChipStyle(card.backgroundColor)"
                     >
                       {{ chip }}
@@ -238,7 +297,7 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <div class="order-1 md:order-2 fullscreen-stack-cards__media">
+              <div class="order-1 md:order-2 fullscreen-stack-cards__media self-start">
                 <template v-if="card.kind === 'video'">
                   <video
                     class="fullscreen-stack-cards__video w-full object-cover rounded-lg"
@@ -273,11 +332,11 @@ onUnmounted(() => {
 
 <style scoped>
 .fullscreen-stack-cards__media {
-  width: clamp(10rem, 62vw, 14rem);
+  width: clamp(10.5rem, 44vw, 13rem);
   flex: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin-inline: 0;
 }
 
