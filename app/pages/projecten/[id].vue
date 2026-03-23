@@ -205,8 +205,8 @@ onUnmounted(() => {
       <div>
         <!-- <nuxt-img class="h-[450px] w-full object-cover" :src="`/images/projecten/${data.projectAssetsDir}/header.jpg`" /> -->
       </div>
-      <LayoutTheContainer class="project-content mt-10 md:mt-14 py-24">
-        <div ref="contentRef" class="project-content__inner px-0">
+      <LayoutTheContainer class="project-content mt-10 md:mt-14">
+        <div ref="contentRef" class="project-content__inner px-0 py-24">
           <ContentRenderer
             class="px-0"
             :value="data"

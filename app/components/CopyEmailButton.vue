@@ -1,6 +1,7 @@
 <template>
   <div class="copy-email-wrapper">
     <button
+      type="button"
       :aria-label="ariaLabel"
       :data-copy-button="copyState"
       class="copy-email-button"
@@ -9,8 +10,8 @@
       @mouseleave="resetState"
       @blur="resetState"
     >
-      <div class="copy-email-icon__wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 24 24" fill="none">
+      <div class="copy-email-icon__wrap" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none">
           <path d="M16 2H8V5H16V2Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
           <path d="M16 3H17.5L19 4.5V19.5L17.5 21H6.5L5 19.5V4.5L6.5 3H8" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
@@ -91,6 +92,7 @@ const resetState = () => {
   display: flex;
   border: none;
   cursor: pointer;
+  position: relative;
 }
 
 .copy-email-button:focus {
@@ -138,6 +140,14 @@ const resetState = () => {
   padding: 0.375em;
   transition: background-color 0.2s;
   display: flex;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.copy-email-icon__wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
   flex-shrink: 0;
 }
 

@@ -161,7 +161,7 @@ watch(loaderFinished, (finished) => {
         preload="metadata"
         poster="/images/other/home_aa.jpg"
       >
-        <source src="/images/other/achtergrond.mp4" type="video/mp4" />
+        <source src="/images/other/MVDriest_Achtergrond.webm" type="video/webm" />
         <!-- fallback image if video not supported -->
         <img src="/images/other/home_aa.jpg" alt="" />
       </video>

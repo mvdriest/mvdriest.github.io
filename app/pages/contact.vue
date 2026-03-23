@@ -48,9 +48,9 @@ const sendForm = async (e: Event) => {
 
 <template>
   <section class="pb-16 md:pb-36 bg-gray-200">
-    <div class="w-full h-[50lvh] relative">
+    <div class="w-full h-[20rem] md:h-[50lvh] relative">
       <div 
-        class="absolute inset-0 bg-cover flex items-center justify-center"
+        class="absolute inset-0 bg-cover"
         :style="{
           backgroundImage: 'url(/images/other/camerafotoik.jpg)',
           backgroundPosition: '100% 30%',
@@ -58,11 +58,11 @@ const sendForm = async (e: Event) => {
           transform: 'scaleX(-1)',
           filter: 'grayscale(100%) brightness(1) contrast(1.1)'
         }"
-      >
-    
-      </div>
-      <LayoutTheContainer class="flex items-end justify-start h-full">
-          <h1 ref="title" class="hero-title uppercase text-4xl max-w-4xl leading-snug md:text-7xl 2xl:text-8xl font-bold text-left text-primary-600 md:leading-[4.5rem] 2xl:leading-[5.8rem] z-10 -tracking-[4px] absolute bottom-8 md:bottom-10">
+      />
+      <div class="absolute inset-0 bg-black/45 md:bg-black/15" />
+      <div class="absolute inset-0 bg-linear-to-t from-black/65 via-black/20 to-transparent md:from-black/30 md:via-transparent md:to-transparent" />
+      <LayoutTheContainer class="relative z-10 flex items-end justify-start h-full">
+          <h1 ref="title" class="hero-title uppercase text-4xl max-w-4xl leading-tight md:text-7xl 2xl:text-8xl font-bold text-left text-primary-600 md:leading-18 2xl:leading-[5.8rem] bottom-8 md:bottom-10 md:-tracking-[4px] absolute [text-shadow:0_3px_12px_rgba(0,0,0,0.65)] md:text-shadow-none">
             Welk <br/>
             merk mag ik <br/>
             pimpen?  
