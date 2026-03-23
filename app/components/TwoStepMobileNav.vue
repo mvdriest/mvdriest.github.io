@@ -18,7 +18,7 @@ const toggleNav = () => (isActive.value ? closeNav() : openNav())
 
 const primaryLinks = [
   { to: '/#top', text: 'Home' },
-  { to: '/#mijnwerk', text: 'Mijnwerk' },
+  { to: '/#mijnwerk', text: 'Mijn werk' },
   { to: '/#overmij', text: 'Over mij' },
   { to: '/#services', text: 'Services' },
   { to: '/contact', text: 'Contact' }

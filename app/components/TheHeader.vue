@@ -122,7 +122,7 @@ watch(loaderFinished, (finished) => {
         <div class="flex items-end justify-start h-full relative z-10 mb-16">
           <div>
             <div class="sm:flex gap-4 items-center flex-wrap hidden">
-              <div class="backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-200 rounded-md">
+              <div class="backdrop-blur-xl px-3 py-2 w-fit backdrop-brightness-200 rounded-md">
                 <p class="text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Video</p>
               </div>
               <div class="backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-200 rounded-md">

@@ -99,7 +99,7 @@ const cardLayoutClass = (index: number) => {
             <span
               v-for="tag in post.tags"
               :key="tag"
-              class="inline-flex items-center rounded-full border border-white/60 bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white backdrop-blur"
+              class="inline-flex items-center rounded-md border border-white/60 bg-black/60 text-xs font-semibold uppercase tracking-[0.08em] text-white backdrop-blur px-3 py-2"
             >
               {{ tag }}
             </span>

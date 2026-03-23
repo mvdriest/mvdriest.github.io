@@ -32,8 +32,8 @@
         </div>
   
         <div class="loader__text-wrap">
-          <span data-load-text data-load-reset class="loader__text-el">Hold tight</span>
-          <span data-load-text data-load-reset class="loader__text-el">Hi there!</span>
+          <span data-load-text data-load-reset class="loader__text-el">Even geduld</span>
+          <span data-load-text data-load-reset class="loader__text-el">Iets vets komt eraan!</span>
         </div>
       </div>
     </div>
