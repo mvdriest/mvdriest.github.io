@@ -77,8 +77,8 @@ const isContactPage = computed(() => route.path === '/contact')
         >
           <p class="font-family-helvetica text-base text-center text-white/70 leading-none font-semibold uppercase tracking-[-0.04em]">© {{ new Date().getFullYear() }} Martijn van Driest</p>
           <div class="flex gap-4 items-center justify-center flex-col sm:flex-row">
-            <a class="font-family-helvetica text-base text-white/70 leading-none font-semibold uppercase tracking-[-0.04em] hover:text-primary-600" href="">Linkedin</a>
-            <a class="font-family-helvetica text-base text-white/70 leading-none font-semibold uppercase tracking-[-0.04em] hover:text-primary-600" href="">Instagram</a>
+            <a class="font-family-helvetica text-base text-white/70 leading-none font-semibold uppercase tracking-[-0.04em] hover:text-primary-600" href="https://www.linkedin.com/in/martijnvandriest/">Linkedin</a>
+            <a class="font-family-helvetica text-base text-white/70 leading-none font-semibold uppercase tracking-[-0.04em] hover:text-primary-600" href="https://www.instagram.com/mvdriest">Instagram</a>
           </div>
         </div>
       </div>
