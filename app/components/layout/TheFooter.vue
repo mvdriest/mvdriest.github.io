@@ -22,47 +22,64 @@ const isContactPage = computed(() => route.path === '/contact')
         <div class="my-12 gap-12 flex flex-col md:flex-row md:justify-between">
           <div class="flex flex-col gap-12 md:flex-row md:gap-20">
             <div class="flex flex-col">
-              <h1 class="max-w-sm text-3xl leading-8 font-semibold mb-8 uppercase">
+              <h1 class="max-w-sm text-3xl leading-8 font-semibold uppercase">
                 Ik ben jouw allround creative.
               </h1>
-              <a
-                href="mail:Martijn.vandriest@gmail.com"
-                class="mt-3 hover:text-primary-600 pointer no-underline"
-              >info@mvdriest.nl</a>
             </div>
             <div class="pages">
-              <h1 class="mb-6 text-xl leading-5 font-bold">
-                Pagina's
-              </h1>
-              <div class="flex flex-col gap-5">
+              <h2 class="mb-6 text-xl text-white/70 font-semibold font-family-helvetica -tracking-[1px] uppercase">
+                Menu
+              </h2>
+              <div class="flex flex-col gap-3">
                 <NuxtLink
-                  to="/"
-                  class="hover:text-primary-600 pointer no-underline"
+                  to="#top"
+                  class="font-family-helvetica text-[2.125em] leading-none font-semibold uppercase tracking-[-0.04em] transition-colors hover:text-primary-600 pointer no-underline"
                 >
-                  Voorpagina
+                  Home
                 </NuxtLink>
                 <NuxtLink
-                  to="/over-mij"
-                  class="hover:text-primary-600 pointer no-underline"
+                  to="#mijnwerk"
+                  class="font-family-helvetica text-[2.125em] leading-none font-semibold uppercase tracking-[-0.04em] transition-colors hover:text-primary-600 pointer no-underline"
+                >
+                  Mijn werk
+                </NuxtLink>
+                <NuxtLink
+                  to="#overmij"
+                  class="font-family-helvetica text-[2.125em] leading-none font-semibold uppercase tracking-[-0.04em] transition-colors hover:text-primary-600 pointer no-underline"
                 >
                   Over mij
                 </NuxtLink>
                 <NuxtLink
-                  to="/portfolio"
-                  class="hover:text-primary-600 pointer no-underline"
+                  to="#services"
+                  class="font-family-helvetica text-[2.125em] leading-none font-semibold uppercase tracking-[-0.04em] transition-colors hover:text-primary-600 pointer no-underline"
                 >
-                  Portfolio
+                  Services
+                </NuxtLink>
+                <NuxtLink
+                  to="/contact"
+                  class="font-family-helvetica text-[2.125em] leading-none font-semibold uppercase tracking-[-0.04em] transition-colors hover:text-primary-600 pointer no-underline"
+                >
+                  Contact
                 </NuxtLink>
               </div>
             </div>
           </div>
-          <SocialsList color="yellow" direction="column" />
+          <div>
+            <h2 class="mb-6 text-xl text-white/70 font-semibold font-family-helvetica -tracking-[1px] uppercase">
+                Email
+              </h2>
+              <CopyEmailButton email="info@mvdriest.nl" />
+          </div>
+          <!-- <SocialsList color="yellow" direction="column" /> -->
         </div>
         <div
-          class="flex gap-2.5 flex-col md:flex-row border-t-2 border-solid border-dark-500 pt-5 justify-between"
+          class="flex gap-4 flex-col md:flex-row border-t-2 border-solid border-dark-500 pt-5 justify-between items-center"
         >
-          <p>© {{ new Date().getFullYear() }} Martijn van Driest</p>
-          <a href="">Privacy verklaring</a>
+          <p class="font-family-helvetica text-base text-center text-white/70 leading-none font-semibold uppercase tracking-[-0.04em]">© {{ new Date().getFullYear() }} Martijn van Driest</p>
+          <div class="flex gap-4 items-center justify-center flex-col sm:flex-row">
+            <a class="font-family-helvetica text-base text-white/70 leading-none font-semibold uppercase tracking-[-0.04em] hover:text-primary-600" href="">Linkedin</a>
+            <a class="font-family-helvetica text-base text-white/70 leading-none font-semibold uppercase tracking-[-0.04em] hover:text-primary-600" href="">Instagram</a>
+          </div>
         </div>
       </div>
     </LayoutTheContainer>

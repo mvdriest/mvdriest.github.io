@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 
 const props = defineProps({
   email: {
@@ -37,30 +37,101 @@ const props = defineProps({
 
 const copyState = ref('')
 const ariaLabel = ref('Copy email to clipboard')
+let resetTimeout = null
 
-const copyEmail = () => {
-  if (props.email) {
-    navigator.clipboard.writeText(props.email).then(() => {
-      copyState.value = 'copied'
-      ariaLabel.value = 'Email copied to clipboard!'
-    })
+const showCopiedState = () => {
+  copyState.value = 'copied'
+  ariaLabel.value = 'Email copied to clipboard!'
+
+  if (resetTimeout) {
+    window.clearTimeout(resetTimeout)
+  }
+
+  resetTimeout = window.setTimeout(() => {
+    resetState()
+  }, 2500)
+}
+
+const fallbackCopyEmail = () => {
+  if (!import.meta.client) {
+    return false
+  }
+
+  const textarea = document.createElement('textarea')
+  textarea.value = props.email
+  textarea.setAttribute('readonly', '')
+  textarea.style.position = 'fixed'
+  textarea.style.opacity = '0'
+  textarea.style.pointerEvents = 'none'
+  textarea.style.top = '0'
+  textarea.style.left = '0'
+
+  document.body.appendChild(textarea)
+  textarea.focus()
+  textarea.select()
+  textarea.setSelectionRange(0, textarea.value.length)
+
+  let isCopied = false
+
+  try {
+    isCopied = document.execCommand('copy')
+  }
+  catch {
+    isCopied = false
+  }
+  finally {
+    document.body.removeChild(textarea)
+  }
+
+  return isCopied
+}
+
+const copyEmail = async () => {
+  if (!props.email || !import.meta.client) {
+    return
+  }
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(props.email)
+      showCopiedState()
+      return
+    }
+  }
+  catch {
+    // Fall back to a legacy copy method below.
+  }
+
+  if (fallbackCopyEmail()) {
+    showCopiedState()
   }
 }
 
-const handleInteraction = (e) => {
+const handleInteraction = async (e) => {
   if (
     e.type === 'click' ||
     (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))
   ) {
     e.preventDefault()
-    copyEmail()
+    await copyEmail()
   }
 }
 
 const resetState = () => {
+  if (resetTimeout) {
+    window.clearTimeout(resetTimeout)
+    resetTimeout = null
+  }
+
   copyState.value = ''
   ariaLabel.value = 'Copy email to clipboard'
 }
+
+onBeforeUnmount(() => {
+  if (resetTimeout) {
+    window.clearTimeout(resetTimeout)
+  }
+})
 </script>
 
 <style scoped>

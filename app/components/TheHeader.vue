@@ -8,6 +8,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger)
 
 const title = ref(null)
 const heroSection = ref(null)
+const tagGroup = ref(null)
 const loaderFinished = useState('loaderFinished')
 
 let split
@@ -22,12 +23,25 @@ const animate = async () => {
   if (hasAnimated) return
   hasAnimated = true
 
+  const tags = tagGroup.value?.children ? Array.from(tagGroup.value.children) : []
+
   split?.revert?.()
   split = new SplitText(title.value, {
     type: "words"
   })
 
-  gsap.set(title.value, { opacity: 1 }) 
+  gsap.set(title.value, { opacity: 1 })
+
+  if (tags.length) {
+    gsap.to(tags, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      stagger: 0.14,
+      duration: 0.95,
+      ease: "power3.out"
+    })
+  }
 
   gsap.from(split.words, {
     yPercent: 100,
@@ -122,23 +136,23 @@ watch(loaderFinished, (finished) => {
   <section ref="heroSection" class="relative h-dvh">
     <div class="relative flex items-end z-20 h-full">
       <LayoutTheContainer>
-        <div class="flex items-end justify-start h-full relative z-10 mb-16">
+        <div class="flex items-end justify-start h-full relative z-10 mb-12 sm:mb-16">
           <div>
-            <div class="sm:flex gap-4 items-center flex-wrap hidden">
-              <div class="backdrop-blur-xl px-3 py-2 w-fit backdrop-brightness-200 rounded-md">
-                <p class="text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Video</p>
+            <div ref="tagGroup" class="flex gap-4 items-center flex-wrap">
+              <div class="hero-tag backdrop-blur-xl px-3 py-2 w-fit backdrop-brightness-150 sm:backdrop-brightness-200 rounded-md border sm:border-0 border-white/20">
+                <p class="sm:text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Video</p>
               </div>
-              <div class="backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-200 rounded-md">
-                <p class="text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Foto</p>
+              <div class="hero-tag backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-150 sm:backdrop-brightness-200 rounded-md border sm:border-0 border-white/20">
+                <p class="sm:text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Foto</p>
               </div>
-              <div class="backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-200 rounded-md">
-                <p class="text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Web</p>
+              <div class="hero-tag backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-150 sm:backdrop-brightness-200 rounded-md border sm:border-0 border-white/20">
+                <p class="sm:text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Web</p>
               </div>
-              <div class="backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-150 rounded-md">
-                <p class="text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Branding</p>
+              <div class="hero-tag backdrop-blur-3xl px-3 py-2 w-fit backdrop-brightness-150 sm:backdrop-brightness-200 rounded-md border sm:border-0 border-white/20">
+                <p class="sm:text-xl text-white font-semibold font-family-helvetica -tracking-[1px] uppercase">Branding</p>
               </div>
             </div>
-            <h1 ref="title" class="hero-title  text-5xl max-w-3xl md:text-8xl font-bold text-left text-primary-600 mt-8 md:leading-[5.8rem] z-10 md:-tracking-[4px]">
+            <h1 ref="title" class="hero-title text-5xl max-w-3xl md:text-8xl font-bold text-left text-primary-600 mt-6 sm:mt-8 md:leading-[5.8rem] z-10 tracking-[-0.04em] md:-tracking-[4px]">
               Jouw merk is 
               te cool voor standaard. 
             </h1>
@@ -162,11 +176,11 @@ watch(loaderFinished, (finished) => {
         disableremoteplayback
         disablepictureinpicture
         preload="metadata"
-        poster="/images/other/home_aa.jpg"
+        poster="/images/other/achtergrond_frame.jpg"
       >
         <source src="/images/other/MVDriest_Achtergrond.webm" type="video/webm" />
         <!-- fallback image if video not supported -->
-        <img src="/images/other/home_aa.jpg" alt="" />
+        <img src="/images/other/achtergrond_frame.jpg" alt="" />
       </video>
     </div>
     <!-- <div class="bg-[url('~/assets/image/Auto-Atlas-Laptop.jpg')] bg-cover bg-no-repeat h-[60rem] -mt-12 w-fullx">
@@ -183,6 +197,12 @@ section {
 
 .hero-title {
   opacity: 0;
+}
+
+.hero-tag {
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+  will-change: transform, opacity;
 }
 
 .ani{

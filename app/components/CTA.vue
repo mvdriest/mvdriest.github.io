@@ -8,7 +8,7 @@
     </div>
     <LayoutTheContainer>
       <div class="flex items-center justify-center flex-col">
-        <h2 class="text-5xl uppercase md:normal-case max-w-4xl md:text-8xl font-bold text-center text-white mt-8 md:leading-[5.8rem] z-10 md:-tracking-[4px]">Wil je dat je <br class="hidden md:block" /> merk ineens <br class="hidden md:block" /><span data-momentum-hover-element class="inline-block"><span data-momentum-hover-target class="bg-primary-600 px-4 md:px-8 text-dark-600 inline-block leading-none align-middle pb-3 md:pb-4 mt-2.5 md:mt-4">wel</span></span> <span data-momentum-hover-element class="inline-block"><span data-momentum-hover-target class="bg-[#FF5421] px-4 md:px-8 text-white inline-block leading-none align-middle pb-3 md:pb-4 mt-2.5 md:mt-4">opvalt?</span></span></h2>
+        <h2 class="text-5xl uppercase md:normal-case max-w-4xl md:text-8xl font-bold text-center text-white mt-24 sm:mt-44 md:leading-[5.8rem] z-10 md:-tracking-[4px]">Wil je dat je <br class="hidden md:block" /> merk ineens <br class="hidden md:block" /><span data-momentum-hover-element class="inline-block"><span data-momentum-hover-target class="bg-primary-600 px-4 md:px-8 text-dark-600 inline-block leading-none align-middle pb-3 md:pb-4 mt-2.5 md:mt-4">wel</span></span> <span data-momentum-hover-element class="inline-block"><span data-momentum-hover-target class="bg-[#FF5421] px-4 md:px-8 text-white inline-block leading-none align-middle pb-3 md:pb-4 mt-2.5 md:mt-4">opvalt?</span></span></h2>
           <p class=" mt-7 text-white text-[22px] font-semibold text-center max-w-2xl font-family-helvetica -tracking-[1px] ">Ik geloof in een wereld waar sterke websites, cinematische video, krachtige fotografie en consistente branding je merk laten opvallen zoals het verdient.</p>
           <IconButton label="Naar aanmeldformulier" href="/contact" class="mt-10" />
       </div>
@@ -36,7 +36,7 @@ onMounted(async () => {
   // One extra frame so layout/font metrics are stable.
   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
 
-  const radial = initRadialTextMarquee(marqueeEl.value, gsap)
+  const radial = initRadialTextMarquee(marqueeEl.value, gsap, rootEl.value)
   if (radial?.cleanup) cleanupFns.push(radial.cleanup)
 
   const hoverCleanup = initMomentumBasedHover(rootEl.value, gsap)
@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
   cleanupFns.forEach((fn) => fn())
 })
 
-function initRadialTextMarquee(wrap: HTMLElement | null, gsap: any) {
+function initRadialTextMarquee(wrap: HTMLElement | null, gsap: any, visibilityTarget?: HTMLElement | null) {
   if (!wrap) return null
   if (wrap.getAttribute('data-radial-text-marquee-init') === 'initialized') return null
 
@@ -219,10 +219,12 @@ function initRadialTextMarquee(wrap: HTMLElement | null, gsap: any) {
     play ? st.tw.play() : st.tw.pause()
   }
 
+  const visibilityEl = visibilityTarget || wrap.parentElement || wrap
+
   let io: IntersectionObserver | null = null
   if ('IntersectionObserver' in window) {
     io = new IntersectionObserver((e) => setPlaying(!!(e[0] && e[0].isIntersecting)), { threshold: 0 })
-    io.observe(wrap)
+    io.observe(visibilityEl)
   }
 
   const rebuild = () => {
@@ -549,7 +551,7 @@ function initMarqueeScrollSpeed(
   text-transform: uppercase;
   font-weight: 600;
   /* set a reasonable height for the marquee */
-  min-height: clamp(8rem, 35vh, 25rem);
+  min-height: clamp(8rem, 0vh, 25rem);
   height: auto;
   /* allow the generated SVG to be centered */
   display: block;

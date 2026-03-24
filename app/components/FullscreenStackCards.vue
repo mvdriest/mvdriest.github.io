@@ -260,15 +260,15 @@ onUnmounted(() => {
           class="absolute inset-0 overflow-hidden rounded-[1.75rem] origin-center will-change-[transform,opacity] backface-hidden max-[640px]:rounded-2xl"
           :style="{ backgroundColor: card.backgroundColor }"
         >
-          <LayoutTheContainer class="h-full px-0 !py-6 sm:!py-8 md:!py-24">
+          <LayoutTheContainer class="h-full md:!px-0 !p-8 md:!py-24">
 
-            <div class="flex h-full min-h-0 flex-col gap-3 md:flex-row md:gap-8 md:justify-between z-2" :style="{ color: getReadableTextColor(card.backgroundColor) }">
+            <div class="flex h-full min-h-0 flex-col gap-5 md:flex-row md:gap-8 md:justify-between z-2" :style="{ color: getReadableTextColor(card.backgroundColor) }">
               <div class="order-2 md:order-1 flex flex-1 min-h-0 w-full max-w-full flex-col items-stretch md:h-full md:w-auto md:max-w-lg lg:max-w-xl">
                 <h2 class="z-50 max-w-200 text-[clamp(2rem,8.5vw,2.7rem)] leading-[0.94] text-left font-bold uppercase md:text-7xl md:leading-18">{{ card.title }}</h2>
 
                 <!-- Mobile: description under H2, then chips -->
                 <div class="mt-3 md:hidden">
-                  <p class="z-50 max-w-88 text-sm font-semibold text-left font-family-helvetica -tracking-[0.8px]" :style="{ color: getDescriptionColor(card.backgroundColor) }">{{ card.description }}</p>
+                  <p class="z-50 max-w-88  font-semibold text-left font-family-helvetica -tracking-[0.8px]" :style="{ color: getDescriptionColor(card.backgroundColor) }">{{ card.description }}</p>
                   <ul class="mt-3 flex max-w-88 flex-wrap gap-2">
                     <li
                       v-for="chip in card.chips"
