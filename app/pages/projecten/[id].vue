@@ -6,7 +6,16 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const route = useRoute()
-const { data } = await useAsyncData('page-data', () => queryCollection('projecten').path(`/projecten/${route.params.id?.toString() ?? ''}`).first())
+const projectSlug = computed(() => route.params.id?.toString() ?? '')
+const projectPath = computed(() => `/projecten/${projectSlug.value}`)
+
+const { data } = await useAsyncData(
+  computed(() => `project-data:${projectSlug.value}`),
+  () => queryCollection('projecten').path(projectPath.value).first(),
+  {
+    watch: [projectPath]
+  }
+)
 
 const pageRef = ref<HTMLElement | null>(null)
 const heroRef = ref<HTMLElement | null>(null)

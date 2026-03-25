@@ -1,7 +1,7 @@
 ---
 title: "Batavia Digital"
 tags: ["Branding", Web]
-description: "Voor Auto Atlas ontwikkelden we een krachtige merkbeleving met een snelle, conversiegerichte website en een visuele stijl die direct vertrouwen uitstraalt."
+description: "Voor Batavia Digital ontwikkelde ik een krachtige merkidentiteit en websiteconcept die de energieke, Nederlandse signatuur van het bureau direct voelbaar maken."
 link: "https://www.autoatlas.nl"
 projectAssetsDir: "bataviadigital"
 ---
