@@ -29,6 +29,12 @@ const contentRef = ref<HTMLElement | null>(null)
 let gsapContext: gsap.Context | null = null
 let onWindowLoad: (() => void) | null = null
 
+type LenisLike = {
+  scrollTo?: (target: string | number, options?: Record<string, unknown>) => void
+}
+
+const nuxtApp = useNuxtApp() as ReturnType<typeof useNuxtApp> & { $lenis?: LenisLike }
+
 const extractFirstText = (value: unknown): string => {
   if (!value) {
     return ''
@@ -83,6 +89,15 @@ const heroDescription = computed(() => {
 
   return extractFirstText(data.value.body)
 })
+
+const resetScrollPosition = () => {
+  if (!process.client) {
+    return
+  }
+
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  nuxtApp.$lenis?.scrollTo?.(0, { immediate: true, force: true })
+}
 
 const initScrollExperience = () => {
   const hero = heroRef.value
@@ -142,6 +157,8 @@ const initScrollExperience = () => {
 onMounted(async () => {
   await nextTick()
 
+  resetScrollPosition()
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return
   }
@@ -159,6 +176,16 @@ onMounted(async () => {
   window.addEventListener('load', onWindowLoad, { once: true })
 })
 
+watch(projectSlug, async (newSlug, oldSlug) => {
+  if (newSlug === oldSlug) {
+    return
+  }
+
+  await nextTick()
+  resetScrollPosition()
+  ScrollTrigger.refresh()
+})
+
 onUnmounted(() => {
   if (gsapContext) {
     gsapContext.revert()
@@ -173,7 +200,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="pageRef" class="bg-gray-200">
+  <section ref="pageRef" class="bg-gray-200 overflow-x-clip">
     <div v-if="!data">
       <p>Article {{ route.params.id?.toString() ?? '' }} niet gevonden</p>
     </div>

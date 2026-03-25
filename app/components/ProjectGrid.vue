@@ -69,7 +69,7 @@ const cardLayoutClass = (index: number) => {
         :to="post.path"
         tag="div"
         :class="[
-          'relative rounded-[1.25em] overflow-hidden bg-dark-600 group',
+          'project-grid__card relative rounded-[1.25em] overflow-hidden bg-dark-600 group',
           cardLayoutClass(index)
         ]"
       >
@@ -77,6 +77,12 @@ const cardLayoutClass = (index: number) => {
           class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
           :src="`/images/projecten/${post.projectAssetsDir}/header.jpg`"
           :alt="post.title ?? 'project'"
+          format="webp"
+          quality="78"
+          sizes="100vw md:66vw xl:42vw"
+          loading="lazy"
+          decoding="async"
+          placeholder
         />
 
         <div class="pointer-events-none absolute inset-0">
@@ -99,7 +105,7 @@ const cardLayoutClass = (index: number) => {
             <span
               v-for="tag in post.tags"
               :key="tag"
-              class="inline-flex items-center rounded-md border border-white/60 bg-black/60 text-base font-semibold font-family-helvetica -tracking-[1px] uppercase text-white backdrop-blur px-3 py-2"
+              class="inline-flex items-center rounded-md border border-white/45 bg-black/72 text-base font-semibold font-family-helvetica -tracking-[1px] uppercase text-white px-3 py-2"
             >
               {{ tag }}
             </span>
@@ -109,3 +115,11 @@ const cardLayoutClass = (index: number) => {
     </div>
   </LayoutTheContainer>
 </template>
+
+<style scoped>
+.project-grid__card {
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 520px;
+}
+</style>

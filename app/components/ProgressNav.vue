@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
-import Lenis from 'lenis'
+
+type LenisLike = {
+  scrollTo?: (target: string | number | HTMLElement, options?: Record<string, unknown>) => void
+}
 
 let cleanupScrollTriggers: (() => void) | null = null
 let anchorCleanup: (() => void) | null = null
+const nuxtApp = useNuxtApp() as ReturnType<typeof useNuxtApp> & { $lenis?: LenisLike }
 
 onMounted(async () => {
   if (!process.client) { return }
@@ -91,14 +95,7 @@ onMounted(async () => {
   })
 
   // --- Lenis / smooth scroll anchor support ---
-  let lenis: any = null
-  try {
-    // Prefer window.Lenis (CDN) if present, otherwise use the installed package
-    const LenisClass = (window as any).Lenis || Lenis
-    lenis = new LenisClass({ autoRaf: true })
-  } catch (e) {
-    lenis = null
-  }
+  const lenis = nuxtApp.$lenis
 
   const bound: Array<{ el: HTMLElement; handler: EventListener }> = []
 
@@ -144,7 +141,6 @@ onMounted(async () => {
 
   anchorCleanup = () => {
     bound.forEach(b => b.el.removeEventListener('click', b.handler))
-    if (lenis && typeof lenis.destroy === 'function') try { lenis.destroy() } catch (e) {}
   }
 
   cleanupScrollTriggers = () => {

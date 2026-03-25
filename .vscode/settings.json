@@ -6,6 +6,17 @@
     "files.associations": {
         "*.css": "tailwindcss"
     },
+    "files.exclude": {
+        "**/.data": true
+    },
+    "search.exclude": {
+        "**/.data": true
+    },
+    "files.watcherExclude": {
+        "**/.data/**": true,
+        "**/.nuxt/**": true,
+        "**/.output/**": true
+    },
     "editor.quickSuggestions": {
         "strings": true
     }
