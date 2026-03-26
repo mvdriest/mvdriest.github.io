@@ -94,7 +94,7 @@ const submitButtonLabel = computed(() => {
             <CopyEmailButton email="info@mvdriest.nl" />
           </div>
           <div class="flex items-start justify-top flex-col">
-            <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase opacity-70 pb-2">Email</p>
+            <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase opacity-70 pb-2">Bedrijfsinfo</p>
             <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase pb-2">Kvk: 85431478</p>
             <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase">BTW: NL004093393B39</p>
           </div>
@@ -154,18 +154,16 @@ const submitButtonLabel = computed(() => {
                 :data-submit-state="contactStatus.type"
                 :disabled="contactStatus.type === 'pending'"
               >
-                <span class="flex h-[1.2em] flex-col items-center justify-center overflow-hidden leading-none" aria-hidden="true">
-                  <span class="flex flex-col items-center transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0,1)] group-hover:-translate-y-[1.2em] group-focus-visible:-translate-y-[1.2em] group-data-[submit-state=success]:-translate-y-[2.4em]">
-                    <span class="flex h-[1.2em] items-center whitespace-nowrap font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">{{ submitButtonLabel }}</span>
-                    <span class="flex h-[1.2em] items-center whitespace-nowrap font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">{{ submitButtonLabel }}</span>
-                    <span class="flex h-[1.2em] items-center whitespace-nowrap font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">{{ submitButtonLabel }}</span>
+                <span class="contact-submit-label-wrap" aria-hidden="true">
+                  <span class="contact-submit-label font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">
+                    {{ submitButtonLabel }}
                   </span>
                 </span>
 
                 <span class="sr-only">{{ submitButtonLabel }}</span>
 
                 <span class="absolute right-2 top-1/2 flex size-[3.35rem] -translate-y-1/2 items-center justify-center overflow-hidden rounded-[0.95rem] text-dark-600" aria-hidden="true">
-                  <span class="absolute inset-0 bg-primary-600 transition-transform duration-[525ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:rotate-90 group-focus-visible:rotate-90 group-data-[submit-state=success]:rotate-90" />
+                  <span class="absolute inset-0 bg-primary-600 transition-transform duration-[525ms] ease-[cubic-bezier(0.625,0.05,0,1)]" />
                   <span class="absolute inset-0 z-1 overflow-hidden rotate-[-45deg]">
                     <span class="absolute inset-0">
                       <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 8" fill="none" class="absolute left-1/2 top-1/2 block size-[1.45rem] p-[0.08em] transition-transform duration-[525ms] ease-[cubic-bezier(0.625,0.05,0,1)] [transform:translate(-50%,-50%)_translateX(0%)] group-hover:[transform:translate(-50%,-50%)_translateX(170%)] group-focus-visible:[transform:translate(-50%,-50%)_translateX(170%)] group-data-[submit-state=success]:[transform:translate(-50%,-50%)_translateX(170%)]"><path d="M4.45231 0.385986H6.02531L9.30131 3.99999L6.02531 7.61399H4.45231L7.40331 4.58499H0.695312V3.42799H7.41631L4.45231 0.385986Z" fill="currentColor" /></svg>
@@ -182,3 +180,31 @@ const submitButtonLabel = computed(() => {
     </LayoutTheContainer>
   </section>
 </template>
+
+<style scoped>
+.contact-submit-label-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.contact-submit-label {
+  --contact-submit-shift: 1.35em;
+  white-space: nowrap;
+  text-shadow: 0 var(--contact-submit-shift) currentColor;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .contact-submit-label {
+    transform: translateY(calc(-1 * var(--contact-submit-shift)));
+  }
+}
+
+.group:focus-visible .contact-submit-label,
+.group[data-submit-state='success'] .contact-submit-label {
+  transform: translateY(calc(-1 * var(--contact-submit-shift)));
+}
+</style>
