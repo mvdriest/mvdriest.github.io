@@ -1,8 +1,8 @@
 ---
 title: "Batavia Digital"
 tags: ["Branding", Web]
-description: "Voor Auto Atlas ontwikkelden we een krachtige merkbeleving met een snelle, conversiegerichte website en een visuele stijl die direct vertrouwen uitstraalt."
-link: "https://www.autoatlas.nl"
+description: "Voor Batavia Digital ontwikkelde ik een krachtige merkidentiteit en websiteconcept die de energieke, Nederlandse signatuur van het bureau direct voelbaar maken."
+link: "https://www.bataviadigital.nl"
 projectAssetsDir: "bataviadigital"
 ---
 
@@ -22,7 +22,7 @@ projectAssetsDir: "bataviadigital"
 ::
 
 ::div{.case-media}
-:gradient-image-card{src="/images/other/batavia_home.jpg" alt="Auto Atlas homepage" gradientFrom="#E94F1B" gradientTo="#F39200"}
+:gradient-image-card{src="/images/other/batavia_home.jpg" alt="Batavia Digital homepage" gradientFrom="#E94F1B" gradientTo="#F39200"}
 ::
 
 ::div{.case-row .case-row--spaced}
@@ -42,10 +42,10 @@ projectAssetsDir: "bataviadigital"
 
 ::div{.case-media .case-media-grid}
 ::div{.case-media-span-2}
-:image-gallery{baseDir="autoatlas" gallery="gallery1" layout="single" :tight="true" :images='["/images/other/batavia_textlogo.jpg"]'}
+:image-gallery{baseDir="bataviadigital" gallery="gallery1" layout="single" :tight="true" :images='["/images/other/batavia_textlogo.jpg"]'}
 ::
-:image-gallery{baseDir="autoatlas" gallery="gallery1" layout="single-tall" :images='["/images/other/batavia_social.jpg"]'}
-:image-gallery{baseDir="autoatlas" gallery="gallery1" layout="single-tall" :images='["/images/other/batavia_vlag.jpg"]'}
+:image-gallery{baseDir="bataviadigital" gallery="gallery1" layout="single-tall" :images='["/images/other/batavia_social.jpg"]'}
+:image-gallery{baseDir="bataviadigital" gallery="gallery1" layout="single-tall" :images='["/images/other/batavia_vlag.jpg"]'}
 ::
 
 ::div{.case-row .case-row--spaced}
@@ -64,7 +64,7 @@ projectAssetsDir: "bataviadigital"
 ::
 
 ::div{.case-media}
-:gradient-image-card{src="/images/other/batavia_home.jpg" alt="Auto Atlas homepage" gradientFrom="#E94F1B" gradientTo="#F39200" duration="1.5" :cycleImages='["/images/other/batavia_home.jpg", "/images/other/batavia_stacked.jpg", "/images/other/batavia_team.jpg"]'}
+:gradient-image-card{src="/images/other/batavia_home.jpg" alt="Batavia Digital homepage" gradientFrom="#E94F1B" gradientTo="#F39200" duration="1.5" :cycleImages='["/images/other/batavia_home.jpg", "/images/other/batavia_stacked.jpg", "/images/other/batavia_team.jpg"]'}
 ::
 
 ::div{.case-row .case-row--spaced}
