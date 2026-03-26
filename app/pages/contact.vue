@@ -11,6 +11,11 @@ const contactStatus = ref<ContactStatus>({
 const sendForm = async (e: Event) => {
   const formData = new FormData(e.target as HTMLFormElement)
 
+  contactStatus.value = {
+    type: 'pending',
+    message: 'Bericht wordt verstuurd...'
+  }
+
   try {
     await $fetch('https://formspree.io/f/myyqynak', {
       method: 'POST',
@@ -44,6 +49,18 @@ const sendForm = async (e: Event) => {
     (e.target as HTMLFormElement)?.reset()
   }
 }
+
+const submitButtonLabel = computed(() => {
+  if (contactStatus.value.type === 'pending') {
+    return 'Versturen...'
+  }
+
+  if (contactStatus.value.type === 'success') {
+    return 'Verzonden'
+  }
+
+  return 'Versturen'
+})
 </script>
 
 <template>
@@ -78,8 +95,8 @@ const sendForm = async (e: Event) => {
           </div>
           <div class="flex items-start justify-top flex-col">
             <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase opacity-70 pb-2">Email</p>
-            <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase pb-2">Kvk: 12345678</p>
-            <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase">BTW: NL866034080B01</p>
+            <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase pb-2">Kvk: 85431478</p>
+            <p class="text-xl text-dark-800 font-semibold font-family-helvetica -tracking-[1px] uppercase">BTW: NL004093393B39</p>
           </div>
         </div>
         <div class="col-span-3 min-w-0">
@@ -109,7 +126,7 @@ const sendForm = async (e: Event) => {
                 <input
                   type="name"
                   name="name"
-                  class="w-full border placeholder:text-slate-300 bg-gray-100 rounded-md p-2"
+                  class="w-full border placeholder:text-slate-300 bg-gray-100 rounded-md p-2 font-semibold font-family-helvetica -tracking-[1px] text-[18px]"
                   placeholder="John Doe"
                 >
               </div>
@@ -118,7 +135,7 @@ const sendForm = async (e: Event) => {
                 <input
                   type="email"
                   name="email"
-                  class="w-full border placeholder:text-slate-300 bg-gray-100 rounded-md p-2"
+                  class="w-full border placeholder:text-slate-300 bg-gray-100 rounded-md p-2 font-semibold font-family-helvetica -tracking-[1px] text-[18px]"
                   placeholder="email@email.com"
                 >
               </div>
@@ -127,15 +144,35 @@ const sendForm = async (e: Event) => {
                 <textarea
                   rows="5"
                   name="message"
-                  class="w-full border placeholder:text-slate-300 bg-gray-100 rounded-md p-2"
+                  class="w-full border placeholder:text-slate-300 bg-gray-100 rounded-md p-2 font-semibold font-family-helvetica -tracking-[1px] text-[18px]"
                   placeholder="Vertel wat over het project"
                 />
               </div>
               <button
                 type="submit"
-                class="bg-black text-primary-600 px-6 py-4 rounded-md"
+                class="group relative flex min-h-16 w-full items-center justify-center overflow-hidden rounded-[0.85rem] border-0 bg-dark-600 px-6 py-6 pr-[5.2rem] text-white transition-opacity duration-200 disabled:cursor-wait focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark-600 cursor-pointer"
+                :data-submit-state="contactStatus.type"
+                :disabled="contactStatus.type === 'pending'"
               >
-                Verstuur
+                <span class="flex h-[1.2em] flex-col items-center justify-center overflow-hidden leading-none" aria-hidden="true">
+                  <span class="flex flex-col items-center transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0,1)] group-hover:-translate-y-[1.2em] group-focus-visible:-translate-y-[1.2em] group-data-[submit-state=success]:-translate-y-[2.4em]">
+                    <span class="flex h-[1.2em] items-center whitespace-nowrap font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">{{ submitButtonLabel }}</span>
+                    <span class="flex h-[1.2em] items-center whitespace-nowrap font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">{{ submitButtonLabel }}</span>
+                    <span class="flex h-[1.2em] items-center whitespace-nowrap font-family-helvetica text-[18px] font-semibold uppercase -tracking-[1px] leading-none">{{ submitButtonLabel }}</span>
+                  </span>
+                </span>
+
+                <span class="sr-only">{{ submitButtonLabel }}</span>
+
+                <span class="absolute right-2 top-1/2 flex size-[3.35rem] -translate-y-1/2 items-center justify-center overflow-hidden rounded-[0.95rem] text-dark-600" aria-hidden="true">
+                  <span class="absolute inset-0 bg-primary-600 transition-transform duration-[525ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:rotate-90 group-focus-visible:rotate-90 group-data-[submit-state=success]:rotate-90" />
+                  <span class="absolute inset-0 z-1 overflow-hidden rotate-[-45deg]">
+                    <span class="absolute inset-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 8" fill="none" class="absolute left-1/2 top-1/2 block size-[1.45rem] p-[0.08em] transition-transform duration-[525ms] ease-[cubic-bezier(0.625,0.05,0,1)] [transform:translate(-50%,-50%)_translateX(0%)] group-hover:[transform:translate(-50%,-50%)_translateX(170%)] group-focus-visible:[transform:translate(-50%,-50%)_translateX(170%)] group-data-[submit-state=success]:[transform:translate(-50%,-50%)_translateX(170%)]"><path d="M4.45231 0.385986H6.02531L9.30131 3.99999L6.02531 7.61399H4.45231L7.40331 4.58499H0.695312V3.42799H7.41631L4.45231 0.385986Z" fill="currentColor" /></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 8" fill="none" class="absolute left-1/2 top-1/2 block size-[1.45rem] p-[0.08em] transition-transform duration-[525ms] ease-[cubic-bezier(0.625,0.05,0,1)] [transform:translate(-50%,-50%)_translateX(-190%)] group-hover:[transform:translate(-50%,-50%)_translateX(0%)] group-focus-visible:[transform:translate(-50%,-50%)_translateX(0%)] group-data-[submit-state=success]:[transform:translate(-50%,-50%)_translateX(0%)]"><path d="M4.45231 0.385986H6.02531L9.30131 3.99999L6.02531 7.61399H4.45231L7.40331 4.58499H0.695312V3.42799H7.41631L4.45231 0.385986Z" fill="currentColor" /></svg>
+                    </span>
+                  </span>
+                </span>
               </button>
             </form>
           </div>

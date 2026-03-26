@@ -14,16 +14,45 @@ const loaderFinished = useState('loaderFinished')
 let split
 let hasAnimated = false
 let heroMediaMatchMedia
+let onPageShow
+
+const getTagElements = () => {
+  return tagGroup.value?.children ? Array.from(tagGroup.value.children) : []
+}
+
+const showHeroContent = () => {
+  if (!title.value) return
+
+  const tags = getTagElements()
+
+  gsap.set(title.value, {
+    opacity: 1,
+    y: 0,
+    clearProps: "transform"
+  })
+
+  if (tags.length) {
+    gsap.set(tags, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      clearProps: "transform"
+    })
+  }
+}
 
 const animate = async () => {
   await nextTick()
 
   if (!title.value) return
 
-  if (hasAnimated) return
+  if (hasAnimated) {
+    showHeroContent()
+    return
+  }
   hasAnimated = true
 
-  const tags = tagGroup.value?.children ? Array.from(tagGroup.value.children) : []
+  const tags = getTagElements()
 
   split?.revert?.()
   split = new SplitText(title.value, {
@@ -118,11 +147,27 @@ const initHeroPadding = () => {
 
 onMounted(() => {
   initHeroPadding()
+
+  if (loaderFinished.value) {
+    void animate()
+  }
+
+  onPageShow = () => {
+    if (!loaderFinished.value) return
+    showHeroContent()
+  }
+
+  window.addEventListener('pageshow', onPageShow)
 })
 
 onUnmounted(() => {
   split?.revert?.()
   heroMediaMatchMedia?.revert?.()
+
+  if (onPageShow) {
+    window.removeEventListener('pageshow', onPageShow)
+    onPageShow = null
+  }
 })
 
 watch(loaderFinished, (finished) => {
