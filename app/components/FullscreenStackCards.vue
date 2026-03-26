@@ -88,7 +88,7 @@ const cards: StackCard[] = [
     images: [
       '/images/other/batavia_social.jpg',
       '/images/other/mockup_bord.jpg',
-      '/images/other/FCUH-Mockup.jpg',
+      '/images/other/FCUH-mockup.jpg',
       '/images/other/mockup_businesscard.jpg',
       '/images/other/batavia_vlag.jpg'
     ]
