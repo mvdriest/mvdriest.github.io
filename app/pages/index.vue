@@ -303,11 +303,23 @@ onUnmounted(() => {
     >
       <LayoutTheContainer> 
         <div class="flex flex-col items-center gap-12 text-dark-800">
-          <h1 class="text-5xl md:text-7xl uppercase font-bold max-w-[66rem] leading-tight text-center">Ik ben <br/>jouw <span class="h-fit">   <nuxt-img
-            class="-mt-4 w-16 md:w-32 md:h-fit inline-block align-middle ml-2 md:-ml-4 mr-1"
-            src="/images/other/camera.png"
-            alt="Star"
-          /></span>allround <br/> creative.</h1>
+          <h1 class="intro-title text-5xl md:text-7xl uppercase font-bold max-w-264 leading-tight text-center">
+            <span class="block">Ik ben</span>
+            <span class="intro-title__row">
+              <span>jouw</span>
+              <span class="intro-title__camera" aria-hidden="true">
+                <img
+                  class="intro-title__camera-image"
+                  src="/images/other/camera.png"
+                  alt=""
+                  loading="eager"
+                  decoding="async"
+                />
+              </span>
+              <span>allround</span>
+            </span>
+            <span class="block">creative.</span>
+          </h1>
           <p class="text-2xl font-semibold text-center max-w-2xl font-family-helvetica -tracking-[1px] opacity-70">Ik geloof in een wereld waar sterke websites, cinematische video, krachtige fotografie en consistente branding je merk laten opvallen zoals het verdient.</p>
         </div>
         <div>
@@ -373,6 +385,54 @@ onUnmounted(() => {
 
 .page {
   background-color: #111216;
+}
+
+.intro-title {
+  line-height: 0.95;
+}
+
+.intro-title__row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15em;
+  flex-wrap: nowrap;
+}
+
+.intro-title__camera {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.15em;
+  flex: 0 0 auto;
+  transform: translateY(-0.04em);
+  overflow: visible;
+}
+
+.intro-title__camera-image {
+  display: block;
+  height: 100%;
+  width: auto;
+  flex: 0 0 auto;
+  max-width: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .intro-title {
+    line-height: 1;
+  }
+
+  .intro-title__row {
+    display: inline;
+  }
+
+  .intro-title__camera {
+    height: 0.72em;
+    display: inline-flex;
+    margin-left: 0.08em;
+    margin-right: 0.08em;
+    transform: translateY(-0.02em);
+  }
 }
 
 .infosection {
