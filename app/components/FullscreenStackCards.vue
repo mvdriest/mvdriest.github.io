@@ -110,6 +110,7 @@ const cards: StackCard[] = [
 ]
 
 const sectionRef = ref<HTMLElement | null>(null)
+const viewportRef = ref<HTMLElement | null>(null)
 const cardsRef = ref<HTMLElement | null>(null)
 const mobileHeaderOffset = ref(0)
 const viewportHeight = ref(0)
@@ -165,8 +166,9 @@ const viewportFrameStyle = computed(() => {
 
 const initStackCards = () => {
   const section = sectionRef.value
+  const viewport = viewportRef.value
   const cardsContainer = cardsRef.value
-  if (!(section instanceof HTMLElement) || !(cardsContainer instanceof HTMLElement)) return
+  if (!(section instanceof HTMLElement) || !(viewport instanceof HTMLElement) || !(cardsContainer instanceof HTMLElement)) return
 
   const cardEls = cardsContainer.querySelectorAll<HTMLElement>('[data-fullscreen-stack-card]')
   if (cardEls.length < 2) return
@@ -186,6 +188,7 @@ const initStackCards = () => {
   const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: section,
+      pin: viewport,
       start: 'top top',
       end: () => {
         const effectiveViewportHeight = isMobileViewport()
@@ -200,7 +203,6 @@ const initStackCards = () => {
         duration: { min: 0.08, max: 0.22 },
         ease: 'power1.inOut'
       },
-      pin: true,
       pinSpacing: true,
       anticipatePin: 1,
       invalidateOnRefresh: true
@@ -250,8 +252,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="min-h-screen w-full bg-gray-200" :style="sectionStyle" data-progress-nav-anchor>
-    <div class="relative box-border h-svh w-full p-12.5 max-[991px]:p-8.75 max-[640px]:p-5" :style="viewportFrameStyle">
+  <section ref="sectionRef" class="fullscreen-stack-cards min-h-screen bg-gray-200" :style="sectionStyle" data-progress-nav-anchor>
+    <div ref="viewportRef" class="fullscreen-stack-cards__viewport relative box-border h-svh p-12.5 max-[991px]:p-8.75 max-[640px]:p-5" :style="viewportFrameStyle">
       <div ref="cardsRef" class="relative h-full w-full">
         <article
           v-for="(card, index) in cards"
@@ -260,7 +262,7 @@ onUnmounted(() => {
           class="absolute inset-0 overflow-hidden rounded-[1.75rem] origin-center will-change-[transform,opacity] backface-hidden max-[640px]:rounded-2xl"
           :style="{ backgroundColor: card.backgroundColor }"
         >
-          <LayoutTheContainer class="h-full md:!px-0 !p-8 md:!py-24">
+          <LayoutTheContainer class="h-full p-8! md:px-0! md:py-24!">
 
             <div class="flex h-full min-h-0 flex-col gap-5 md:flex-row md:gap-8 md:justify-between z-2" :style="{ color: getReadableTextColor(card.backgroundColor) }">
               <div class="order-2 md:order-1 flex flex-1 min-h-0 w-full max-w-full flex-col items-stretch md:h-full md:w-auto md:max-w-lg lg:max-w-xl">
@@ -331,6 +333,18 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.fullscreen-stack-cards {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.fullscreen-stack-cards__viewport {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
 .fullscreen-stack-cards__media {
   width: clamp(10.5rem, 44vw, 13rem);
   flex: none;
