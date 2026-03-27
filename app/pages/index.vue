@@ -320,7 +320,8 @@ onUnmounted(() => {
             </span>
             <span class="block">creative.</span>
           </h1>
-          <p class="text-2xl font-semibold text-center max-w-2xl font-family-helvetica -tracking-[1px] opacity-70">Ik geloof in een wereld waar sterke websites, cinematische video, krachtige fotografie en consistente branding je merk laten opvallen zoals het verdient.</p>
+          <p class="text-2xl font-semibold text-center max-w-2xl font-family-helvetica -tracking-[1px] opacity-70">Ik zorg dat jouw merk er online net zo goed uitziet als het verdient.
+Van websites tot video en alles daartussen.</p>
         </div>
         <div>
         </div>
@@ -417,7 +418,7 @@ onUnmounted(() => {
   max-width: none;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 900px) {
   .intro-title {
     line-height: 1;
   }
@@ -427,10 +428,17 @@ onUnmounted(() => {
   }
 
   .intro-title__camera {
-    height: 0.72em;
+    height: 0.9em;
     display: inline-flex;
     margin-left: 0.08em;
     margin-right: 0.08em;
+    transform: translateY(-0.03em);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .intro-title__camera {
+    height: 0.72em;
     transform: translateY(-0.02em);
   }
 }

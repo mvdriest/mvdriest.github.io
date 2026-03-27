@@ -56,10 +56,11 @@ const cardLayoutClass = (index: number) => {
 
 <template>
   <LayoutTheContainer>
-    <div class="grid grid-cols-1 gap-[24px] md:grid-cols-3 md:auto-rows-[120px]">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:grid-rows-[auto_repeat(6,120px)]">
       <div class="md:col-span-2 flex items-end">
         <h1 class="text-5xl md:text-7xl font-semibold uppercase text-primary-600">
-          Een selectie Mijn van werk.
+          <span class="block">Een selectie</span>
+          <span class="block">van mijn werk.</span>
         </h1>
       </div>
 
@@ -81,10 +82,10 @@ const cardLayoutClass = (index: number) => {
 
         <div class="pointer-events-none absolute inset-0">
           <div
-            class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-dark-600/65 to-transparent"
+            class="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-dark-600/65 to-transparent"
           />
           <div
-            class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-dark-600/70 to-transparent"
+            class="absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-dark-600/70 to-transparent"
           />
         </div>
 
