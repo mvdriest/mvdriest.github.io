@@ -26,9 +26,8 @@ const primaryLinks = [
 ]
 
 const secondaryLinks = [
-  { href: 'https://www.instagram.com/', text: 'Instagram' },
-  { href: 'https://www.linkedin.com/', text: 'LinkedIn' },
-  { href: 'https://www.behance.net/', text: 'Behance' }
+  { href: 'https://www.instagram.com/mvdriest', text: 'Instagram' },
+  { href: 'https://www.linkedin.com/in/martijnvandriest/', text: 'LinkedIn' }
 ]
 
 const onKeyDown = (e: KeyboardEvent) => {

@@ -57,7 +57,7 @@ const getChipStyle = (backgroundColor: string) => {
 const cards: StackCard[] = [
   {
     title: 'VIDEO PRODUCTIE',
-    description: 'Van social content tot cinematische merkfilms die blijven hangen.',
+    description: 'Korte, pakkende promotievideo’s voor social media waarmee je opvalt en kunt adverteren.',
     alt: 'Video productie',
     backgroundColor: '#111216',
     chips: ['Concepting', 'Regie', 'Opname', 'Montage'],
@@ -69,7 +69,7 @@ const cards: StackCard[] = [
     description: 'Sterke beelden met karakter, licht en compositie die je verhaal dragen.',
     alt: 'Fotografie',
     backgroundColor: '#FA7A2B',
-    chips: ['Portret', 'Product', 'Event', 'Nabewerking'],
+    chips: ['Portret', 'Sfeervol', 'Event', 'Nabewerking'],
     kind: 'images',
     images: [
       '/images/other/sanne.jpg',
